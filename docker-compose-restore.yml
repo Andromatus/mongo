@@ -1,0 +1,10 @@
+version: '3'
+services:
+  mongo:
+    image: mongo
+    volumes:
+      - ./backup:/backup
+    ports:
+      - "27017:27017"
+    command: |
+     mongorestore --host mongo -d database /backup
