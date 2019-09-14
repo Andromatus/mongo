@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker-compose -f docker-compose-backup.yml run mongo
+docker exec -ti mongo sh -c 'mongodump --out /backup --host mongo:27017'

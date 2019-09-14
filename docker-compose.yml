@@ -6,7 +6,9 @@ services:
     image: "mongo"
     restart: always 
     volumes:
-      - ./databases:/data/db
+      - "databases:/data/db"
+      - "backup:/backup"
+      - "backup:/mongorestore"
     ports:
       - "27017:27017"
 

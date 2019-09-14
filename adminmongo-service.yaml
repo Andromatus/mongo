@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.version: 1.11.0 (39ad614)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: adminmongo
+  name: adminmongo
+spec:
+  ports:
+  - name: "8082"
+    port: 8082
+    targetPort: 8082
+  selector:
+    io.kompose.service: adminmongo
+status:
+  loadBalancer: {}

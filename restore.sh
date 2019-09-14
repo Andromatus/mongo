@@ -1,1 +1,1 @@
-docker-compose -f docker-compose-restore.yml run mongo
+docker exec -ti mongo sh -c 'mongorestore /backup --host mongo:27017'

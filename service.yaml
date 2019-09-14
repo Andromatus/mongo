@@ -1,0 +1,46 @@
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: replica-set-a
+spec:
+  serviceName: "replica-set-a"
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        role: replica-set-a
+        environment: test
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: replica-set-a
+          image: mongo
+          resources:
+            limits:
+              memory: 2Gi
+            requests:
+              memory: 2Gi
+          volumeMounts:
+          - name: mongo-persistent
+            mountPath: /data/db
+          command:
+            - mongod
+            - "--bind_ip"
+            - "0.0.0.0"
+            - "--replSet"
+            - a
+            - "--smallfiles"
+            - "--oplogSize"
+            - "1024"
+          ports:
+            - containerPort: 27017
+  volumeClaimTemplates:
+  - metadata:
+      name: mongo-persistent
+    spec:
+      storageClassName: manual
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 100Gi

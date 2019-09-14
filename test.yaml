@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: testin
+  labels:
+    app: testin
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: testin
+  template:
+    metadata:
+      labels:
+        app: testin
+    spec:
+      containers:
+      - name: testin
+        image: gcr.io/google_containers/echoserver:1.14
+        ports:
+        - containerPort: 8000

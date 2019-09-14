@@ -1,3 +1,3 @@
 docker-compose down -v
-sudo rm -rf databases/*
-docker-compose up
+rm -rf databases/*
+docker-compose up -d
